@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS, CategoryScale, LinearScale, BarElement, Tooltip, Legend,
@@ -10,6 +11,7 @@ ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 export default function InstructorDashboard() {
   const { user } = useAuth();
+  const navigate = useNavigate();
   const [summary, setSummary] = useState(null);
   const [error, setError] = useState(null);
 
@@ -32,8 +34,18 @@ export default function InstructorDashboard() {
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-8">
-      <h1 className="font-display text-2xl font-semibold text-ink">Instructor studio</h1>
-      <p className="text-sm text-slate">Welcome, {user?.name}. Here's how your courses are performing.</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="font-display text-2xl font-semibold text-ink">Instructor studio</h1>
+          <p className="text-sm text-slate">Welcome, {user?.name}. Here's how your courses are performing.</p>
+        </div>
+        <button
+          onClick={() => navigate("/instructor/create-course")}
+          className="rounded-lg bg-trail px-4 py-2 text-sm font-medium text-white hover:bg-trail/90"
+        >
+          + Create course
+        </button>
+      </div>
       {error && <p className="mt-4 rounded-lg bg-summit/10 px-4 py-2 text-sm text-summit">{error}</p>}
 
       <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-3">

@@ -7,6 +7,7 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import StudentDashboard from "./pages/student/StudentDashboard";
 import InstructorDashboard from "./pages/instructor/InstructorDashboard";
+import CreateCourse from "./pages/instructor/CreateCourse";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 
 export default function App() {
@@ -25,6 +26,10 @@ export default function App() {
         <Route
           path="/instructor"
           element={<ProtectedRoute roles={["instructor", "super_admin"]}><InstructorDashboard /></ProtectedRoute>}
+        />
+        <Route
+          path="/instructor/create-course"
+          element={<ProtectedRoute roles={["instructor", "super_admin"]}><CreateCourse /></ProtectedRoute>}
         />
         <Route
           path="/admin"
