@@ -54,7 +54,7 @@ async def register(payload: UserRegister):
         raise HTTPException(status.HTTP_400_BAD_REQUEST, "An account with this email already exists")
 
     status_value = (
-        UserStatus.PENDING_APPROVAL if payload.role == UserRole.INSTRUCTOR else UserStatus.ACTIVE
+        UserStatus.ACTIVE if payload.role in (UserRole.INSTRUCTOR, UserRole.STUDENT) else UserStatus.PENDING_APPROVAL
     )
 
     doc = {

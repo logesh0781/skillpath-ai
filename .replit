@@ -1,7 +1,7 @@
 modules = ["python-3.11", "nodejs-20"]
 [nix]
 channel = "stable-25_05"
-packages = ["cacert", "freetype", "glibcLocales", "libxcrypt"]
+packages = ["cacert", "cargo", "freetype", "glibcLocales", "libiconv", "libxcrypt", "rustc"]
 
 [agent]
 expertMode = true
