@@ -1379,6 +1379,7 @@ version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
     { name = "aiofiles" },
+    { name = "certifi" },
     { name = "cloudinary" },
     { name = "email-validator" },
     { name = "fastapi" },
@@ -1399,6 +1400,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "aiofiles", specifier = ">=25.1.0" },
+    { name = "certifi", specifier = ">=2026.6.17" },
     { name = "cloudinary", specifier = "==1.40.0" },
     { name = "email-validator", specifier = "==2.1.1" },
     { name = "fastapi", specifier = "==0.111.0" },

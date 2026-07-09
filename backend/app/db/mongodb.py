@@ -1,6 +1,7 @@
 """
 MongoDB connection lifecycle (Motor async client) and collection accessors.
 """
+import certifi
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 
 from app.core.config import settings
@@ -11,7 +12,7 @@ _db: AsyncIOMotorDatabase | None = None
 
 async def connect_to_mongo() -> None:
     global _client, _db
-    _client = AsyncIOMotorClient(settings.MONGO_URI)
+    _client = AsyncIOMotorClient(settings.MONGO_URI, tlsCAFile=certifi.where())
     _db = _client[settings.MONGO_DB_NAME]
     # Indexes — created once on startup, safe to call repeatedly (idempotent)
     await _db.users.create_index("email", unique=True)
