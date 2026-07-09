@@ -1,0 +1,28 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "A working full-stack foundation for the SIH \"Learning Path Dashboard\" brief: React + Vite + Tailwind frontend, FastAPI + MongoDB backend, JWT auth with role-based access (student / instructor / super admin), gamification (XP, levels, streaks), progress/reading/video analytics, and an AI layer wired for Google Gemini (roadmap generator, tutor, quiz generator, notes generator, skill-gap analysis) with a mock fallback so the app runs with zero API keys.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vitejs/plugin-react": "^6.0.3",
+    "autoprefixer": "^10.5.2",
+    "axios": "^1.18.1",
+    "chart.js": "^4.5.1",
+    "framer-motion": "^12.42.2",
+    "postcss": "^8.5.16",
+    "react": "^19.2.7",
+    "react-chartjs-2": "^5.3.1",
+    "react-dom": "^19.2.7",
+    "react-hook-form": "^7.81.0",
+    "react-hot-toast": "^2.6.0",
+    "react-router-dom": "^7.18.1",
+    "tailwindcss": "^4.3.2",
+    "vite": "^8.1.4"
+  }
+}

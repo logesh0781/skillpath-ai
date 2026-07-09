@@ -28,10 +28,7 @@ class Settings(BaseSettings):
     USE_LOCAL_STORAGE: bool = True
     LOCAL_UPLOAD_DIR: str = "uploads"
 
-    ALLOWED_ORIGINS: list[str] = [
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-    ]
+    ALLOWED_ORIGINS: list[str] = ["*"]
 
     class Config:
         env_file = ".env"
