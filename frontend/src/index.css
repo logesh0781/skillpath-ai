@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  :focus-visible { outline: 2px solid #E0A845; outline-offset: 2px; }
+}
+
+/* Subtle contour/topographic texture behind the app shell — echoes a trail map without being loud */
+.bg-map-texture {
+  background-color: #F7F3E9;
+  background-image: radial-gradient(circle at 1px 1px, rgba(20,25,43,0.07) 1px, transparent 0);
+  background-size: 18px 18px;
+}
+
+.path-line {
+  stroke-dasharray: 6 6;
+}
