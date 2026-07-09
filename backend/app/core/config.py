@@ -28,7 +28,13 @@ class Settings(BaseSettings):
     USE_LOCAL_STORAGE: bool = True
     LOCAL_UPLOAD_DIR: str = "uploads"
 
-    ALLOWED_ORIGINS: list[str] = ["*"]
+    ALLOWED_ORIGINS: list[str] = [
+        "http://localhost:5000",
+        "http://localhost:5173",
+        "http://127.0.0.1:5000",
+        "http://127.0.0.1:5173",
+    ]
+    EXTRA_ALLOWED_ORIGINS: str = ""  # comma-separated, set via env for production URL
 
     class Config:
         env_file = ".env"

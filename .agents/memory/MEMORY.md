@@ -1,0 +1,1 @@
+- [MongoDB Atlas on Replit](mongodb-atlas-replit.md) — SSL fix via certifi + Atlas must have 0.0.0.0/0 in network access

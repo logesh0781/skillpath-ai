@@ -22,7 +22,10 @@ logger = logging.getLogger("skillpath")
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    logger.info("Connecting to MongoDB at %s ...", settings.MONGO_URI)
+    # Log only host/db — never the full URI which contains credentials
+    from urllib.parse import urlparse
+    _parsed = urlparse(settings.MONGO_URI)
+    logger.info("Connecting to MongoDB at %s/%s ...", _parsed.hostname or "unknown", settings.MONGO_DB_NAME)
     await connect_to_mongo()
     logger.info("Startup complete.")
     yield
@@ -37,9 +40,12 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
+_extra = [o.strip() for o in settings.EXTRA_ALLOWED_ORIGINS.split(",") if o.strip()]
+_origins = list(set(settings.ALLOWED_ORIGINS + _extra))
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.ALLOWED_ORIGINS,
+    allow_origins=_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
