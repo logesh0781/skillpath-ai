@@ -3,11 +3,14 @@ SkillPath AI — FastAPI application entrypoint.
 Run with:  uvicorn app.main:app --reload
 """
 import logging
+import os
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 
 from app.core.config import settings
 from app.db.mongodb import close_mongo_connection, connect_to_mongo
@@ -49,11 +52,6 @@ async def unhandled_exception_handler(request: Request, exc: Exception):
     return JSONResponse(status_code=500, content={"detail": "Internal server error"})
 
 
-@app.get("/", tags=["Health"])
-async def root():
-    return {"service": settings.APP_NAME, "status": "ok"}
-
-
 @app.get("/health", tags=["Health"])
 async def health():
     return {"status": "healthy"}
@@ -67,3 +65,23 @@ app.include_router(courses.router, prefix=PREFIX)
 app.include_router(progress.router, prefix=PREFIX)
 app.include_router(analytics.router, prefix=PREFIX)
 app.include_router(ai.router, prefix=PREFIX)
+
+# Serve built React frontend (production)
+STATIC_DIR = Path(__file__).resolve().parents[2] / "frontend" / "dist"
+if STATIC_DIR.exists():
+    app.mount("/assets", StaticFiles(directory=str(STATIC_DIR / "assets")), name="assets")
+
+    @app.get("/", include_in_schema=False)
+    async def serve_root():
+        return FileResponse(str(STATIC_DIR / "index.html"))
+
+    @app.get("/{full_path:path}", include_in_schema=False)
+    async def serve_spa(full_path: str):
+        file_path = STATIC_DIR / full_path
+        if file_path.exists() and file_path.is_file():
+            return FileResponse(str(file_path))
+        return FileResponse(str(STATIC_DIR / "index.html"))
+else:
+    @app.get("/", tags=["Health"])
+    async def root():
+        return {"service": settings.APP_NAME, "status": "ok"}
