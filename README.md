@@ -56,6 +56,10 @@ npm run dev                                          # http://localhost:5173
 The Vite dev server proxies `/api` to `http://localhost:8000`, so no CORS config is
 needed locally.
 
+## 🚀 Visit the Website
+
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge)](https://skillpath-aizip--logesh0781.replit.app)
+
 ## Project structure
 ```
 backend/app/
